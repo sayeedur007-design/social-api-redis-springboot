@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
+		"name": "Social API - High Velocity Redis Backend",
+		"description": "A collection of API requests to interact with the high-performance social backend, featuring Redis-based guardrails, virality scoring, and notification throttling.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Feed: Create New Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"🚀 Launching the high-performance social backend!\",\n    \"authorId\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/posts",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "posts"]
+				}
+			}
+		},
+		{
+			"name": "Engagement: Add Comment (Subject to Redis Guardrails)",
+			"description": "Attempts to add a comment. For Bot authors (ID 101+), this triggers atomic limit checks and cooldown locks.",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"This bot reply is strictly monitored by the Redis velocity engine.\",\n    \"authorId\": 101,\n    \"depthLevel\": 1,\n    \"targetUserId\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/posts/1/comments",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "posts", "1", "comments"]
+				}
+			}
+		},
+		{
+			"name": "Engagement: Like Post (Boost Virality)",
+			"description": "Increments the post likes and triggers an atomic +20 boost to the post's virality score.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/posts/1/like",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "posts", "1", "like"]
+				}
+			}
+		},
+		{
+			"name": "Analytics: Get Global Virality Score",
+			"description": "Retrieves the real-time interaction score calculated by the Redis caching layer.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/posts/1/virality",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["api", "posts", "1", "virality"]
+				}
+			}
+		}
+	]
+}
